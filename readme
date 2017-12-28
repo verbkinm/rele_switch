@@ -1,0 +1,40 @@
+Программа для управления usb-реле модулем LCUS-1 на базе микроконтроллера CH340 для операционных систем семейства *NIX
+
+	LCUS-1 type USB Relay Module Electronic Converter PCB USB Intelligent Control Switch 
+
+Introduction:
+
+LCUS-1 USB relay module equipped with stable performance USB to serial chip and microcontrollers, the computer can be used in the serial port debugging software to send serial port command to control the relay on and off.
+
+Product Parameters:
+
+    Controller chip: Onboard high-performance microcontroller chip	
+    Control chip: Onboard CH340 USB control chip	
+    LED indicator: Onboard power LED and relay status LED	
+    Relays: Onboard 5V, 10A / 250VAC, 10A / 30VDC relays, long relay life, can be continuous pull 10 million	
+    Protection function: with overcurrent protection and relay diode freewheeling protection.	
+
+ 
+LC USB switch protocol:
+ 
+Data (1) --- starting identity (the default is 0xA0)
+Data (2) --- switch address code (default is 0x01, identifying the first channel switch)
+Data (3) --- Operating Data (0x00 to "Off", 0x01 "On")
+Data (4) --- checksum
+ 
+Example:
+Open USB switch: A0 01 01 A2
+Close USB switch: A0 01 00 A1
+
+ 
+
+Operation:	
+
+Step1: the USB relay module into the computer, install CH340 USB to serial chip driver	
+Step 2: Open the STC-ISP, SSCOM32 serial debugging software, select the baud rate of 9600, in hexadecimal (hex) form to send A0 01 01 A2 to open the relay; hex (hex) form Send A0 01 00 A1 to turn off the relay, you can choose to send manually or automatically. The following: SSCOM332 serial debugging software for example:	
+
+Send manually	
+Select the baud rate 9600, check the "HEX send", enter the command A0 01 01 A2 or A0 01 00 A1, point "send", you can turn on or off the relay	
+
+Send manually	
+Select the baud rate 9600, click on the SSCOM32 interface in the "expansion", enter the command a0 01 01 A2 and A0 01 00 A1, check the "HEX send", enter the automatic cycle to send the interval, check the "automatic loop" The relay can be automatically turned on and off	
